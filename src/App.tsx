@@ -1,24 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect} from "react";
+import "./App.css";
+import {useDispatch, useSelector} from "react-redux";
+
+import GlobalStoreResponse from "./typings";
+import {getAllCharacters} from "./store/characters/action";
 
 function App() {
+  const dispatch = useDispatch();
+  const {characters, loading} = useSelector(
+    (state: GlobalStoreResponse) => state.characters
+  );
+
+  useEffect(() => {
+    dispatch(getAllCharacters());
+  }, [dispatch]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {loading && <div> loading ........ </div>}
+      {characters &&
+        characters.map((character) => {
+          return (
+            <span key={character.name} className="name">
+              {character.name}
+            </span>
+          );
+        })}
     </div>
   );
 }
