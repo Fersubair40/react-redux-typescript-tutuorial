@@ -2,13 +2,14 @@ import React, {useEffect} from "react";
 import "./App.css";
 import {useDispatch, useSelector} from "react-redux";
 
-import GlobalStoreResponse from "./typings";
+
 import {getAllCharacters} from "./store/characters/action";
+import { RootState } from "./store";
 
 function App() {
   const dispatch = useDispatch();
-  const {characters, loading} = useSelector(
-    (state: GlobalStoreResponse) => state.characters
+  const {characters, loading, error} = useSelector(
+    (state: RootState) => state.characters
   );
 
   useEffect(() => {
@@ -18,8 +19,9 @@ function App() {
   return (
     <div className="App">
       {loading && <div> loading ........ </div>}
+      {error && <div> Error </div>}
       {characters &&
-        characters.map((character) => {
+        characters?.map((character) => {
           return (
             <span key={character.name} className="name">
               {character.name}

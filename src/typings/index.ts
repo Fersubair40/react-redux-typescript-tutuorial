@@ -18,7 +18,8 @@ type characters = {
 };
 
 type characterType = {
-  loading: false;
+  loading: boolean;
+  error: boolean;
   characters: characters[];
 };
 

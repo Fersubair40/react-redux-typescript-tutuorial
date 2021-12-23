@@ -7,7 +7,7 @@ const initialState: characterState = {
   error: false,
 };
 
-export const characterReducer = (state = initialState, action: Action) => {
+export const characterReducer = (state = initialState, action: Action): characterState => {
   switch (action.type) {
     case charactersActionTypes.GET_ALL.pending: {
       return {

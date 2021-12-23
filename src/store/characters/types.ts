@@ -18,9 +18,9 @@ export type characters = {
 };
 
 export type characterState = {
-  characters: characters[];
-  loading: false;
-  error: false;
+  characters: characters[] | null;
+  loading: boolean;
+  error: boolean;
 };
 export type Action = {
   type: "GET_ALL";
